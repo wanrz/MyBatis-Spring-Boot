@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import tk.mybatis.springboot.Application;
 import tk.mybatis.springboot.model.Country;
-import tk.mybatis.springboot.service.CountryService;
+import tk.mybatis.springboot.service.impl.CountryService;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 abel533@gmail.com
+ * Copyright (c) 2014 abel533@gmail.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,44 +24,27 @@
 
 package tk.mybatis.springboot.service;
 
-import com.github.pagehelper.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.springboot.mapper.CityMapper;
-import tk.mybatis.springboot.model.City;
 
 import java.util.List;
 
 /**
- * @author liuzh
- * @since 2015-12-19 11:09
+ * 通用接口
  */
 @Service
-public class CityService {
+public interface IService<T> {
 
-    @Autowired
-    private CityMapper cityMapper;
+    T selectByKey(Object key);
 
-    public List<City> getAll(City city) {
-        if (city.getPage() != null && city.getRows() != null) {
-            PageHelper.startPage(city.getPage(), city.getRows());
-        }
-        return cityMapper.selectAll();
-    }
+    int save(T entity);
 
-    public City getById(Integer id) {
-        return cityMapper.selectByPrimaryKey(id);
-    }
+    int delete(Object key);
 
-    public void deleteById(Integer id) {
-        cityMapper.deleteByPrimaryKey(id);
-    }
+    int updateAll(T entity);
 
-    public void save(City country) {
-        if (country.getId() != null) {
-            cityMapper.updateByPrimaryKey(country);
-        } else {
-            cityMapper.insert(country);
-        }
-    }
+    int updateNotNull(T entity);
+
+    List<T> selectByExample(Object example);
+
+    //TODO 其他...
 }

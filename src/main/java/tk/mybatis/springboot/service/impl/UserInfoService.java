@@ -22,22 +22,46 @@
  * THE SOFTWARE.
  */
 
-package tk.mybatis.springboot.conf;
+package tk.mybatis.springboot.service.impl;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import com.github.pagehelper.PageHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tk.mybatis.springboot.mapper.UserInfoMapper;
+import tk.mybatis.springboot.model.UserInfo;
+
+import java.util.List;
 
 /**
  * @author liuzh
- * @since 2015-12-19 16:16
+ * @since 2016-01-31 21:42
  */
-@Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+@Service
+public class UserInfoService {
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
+    public List<UserInfo> getAll(UserInfo UserInfo) {
+        if (UserInfo.getPage() != null && UserInfo.getRows() != null) {
+            PageHelper.startPage(UserInfo.getPage(), UserInfo.getRows());
+        }
+        return userInfoMapper.selectAll();
+    }
+
+    public UserInfo getById(Integer id) {
+        return userInfoMapper.selectByPrimaryKey(id);
+    }
+
+    public void deleteById(Integer id) {
+        userInfoMapper.deleteByPrimaryKey(id);
+    }
+
+    public void save(UserInfo country) {
+        if (country.getId() != null) {
+            userInfoMapper.updateByPrimaryKey(country);
+        } else {
+            userInfoMapper.insert(country);
+        }
     }
 }

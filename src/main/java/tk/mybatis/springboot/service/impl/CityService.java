@@ -22,46 +22,46 @@
  * THE SOFTWARE.
  */
 
-package tk.mybatis.springboot.service;
+package tk.mybatis.springboot.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.springboot.mapper.UserInfoMapper;
-import tk.mybatis.springboot.model.UserInfo;
+import tk.mybatis.springboot.mapper.CityMapper;
+import tk.mybatis.springboot.model.City;
 
 import java.util.List;
 
 /**
  * @author liuzh
- * @since 2016-01-31 21:42
+ * @since 2015-12-19 11:09
  */
 @Service
-public class UserInfoService {
+public class CityService {
 
     @Autowired
-    private UserInfoMapper userInfoMapper;
+    private CityMapper cityMapper;
 
-    public List<UserInfo> getAll(UserInfo UserInfo) {
-        if (UserInfo.getPage() != null && UserInfo.getRows() != null) {
-            PageHelper.startPage(UserInfo.getPage(), UserInfo.getRows());
+    public List<City> getAll(City city) {
+        if (city.getPage() != null && city.getRows() != null) {
+            PageHelper.startPage(city.getPage(), city.getRows());
         }
-        return userInfoMapper.selectAll();
+        return cityMapper.selectAll();
     }
 
-    public UserInfo getById(Integer id) {
-        return userInfoMapper.selectByPrimaryKey(id);
+    public City getById(Integer id) {
+        return cityMapper.selectByPrimaryKey(id);
     }
 
     public void deleteById(Integer id) {
-        userInfoMapper.deleteByPrimaryKey(id);
+        cityMapper.deleteByPrimaryKey(id);
     }
 
-    public void save(UserInfo country) {
+    public void save(City country) {
         if (country.getId() != null) {
-            userInfoMapper.updateByPrimaryKey(country);
+            cityMapper.updateByPrimaryKey(country);
         } else {
-            userInfoMapper.insert(country);
+            cityMapper.insert(country);
         }
     }
 }

@@ -26,13 +26,11 @@ package tk.mybatis.springboot.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tk.mybatis.springboot.model.City;
-import tk.mybatis.springboot.service.CityService;
+import tk.mybatis.springboot.service.impl.CityService;
 
 import java.util.List;
 

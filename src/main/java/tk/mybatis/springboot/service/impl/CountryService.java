@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package tk.mybatis.springboot.service;
+package tk.mybatis.springboot.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;

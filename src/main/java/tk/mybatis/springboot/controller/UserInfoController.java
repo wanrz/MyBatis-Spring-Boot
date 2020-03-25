@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import tk.mybatis.springboot.model.UserInfo;
-import tk.mybatis.springboot.service.UserInfoService;
+import tk.mybatis.springboot.service.impl.UserInfoService;
 
 import java.util.List;
 

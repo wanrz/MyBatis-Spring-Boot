@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 abel533@gmail.com
+ * Copyright (c) 2014 abel533@gmail.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,22 +22,55 @@
  * THE SOFTWARE.
  */
 
-package tk.mybatis.springboot.conf;
+package tk.mybatis.springboot.service.impl;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.springboot.service.IService;
+
+import java.util.List;
 
 /**
- * @author liuzh
- * @since 2015-12-19 16:16
+ * Created by liuzh on 2014/12/11.
  */
-@Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+public abstract class BaseService<T> implements IService<T> {
+
+    @Autowired
+    protected Mapper<T> mapper;
+
+    public Mapper<T> getMapper() {
+        return mapper;
+    }
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    public T selectByKey(Object key) {
+        return mapper.selectByPrimaryKey(key);
     }
+
+    @Override
+    public int save(T entity) {
+        return mapper.insert(entity);
+    }
+
+    @Override
+    public int delete(Object key) {
+        return mapper.deleteByPrimaryKey(key);
+    }
+
+    @Override
+    public int updateAll(T entity) {
+        return mapper.updateByPrimaryKey(entity);
+    }
+
+    @Override
+    public int updateNotNull(T entity) {
+        return mapper.updateByPrimaryKeySelective(entity);
+    }
+
+    @Override
+    public List<T> selectByExample(Object example) {
+        return mapper.selectByExample(example);
+    }
+
+    //TODO 其他...
 }
