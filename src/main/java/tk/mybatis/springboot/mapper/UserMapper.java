@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 abel533@gmail.com
+ * Copyright (c) 2014-2016 abel533@gmail.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,37 +22,15 @@
  * THE SOFTWARE.
  */
 
-package tk.mybatis.springboot.service;
+package tk.mybatis.springboot.mapper;
 
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import tk.mybatis.springboot.model.City;
+import tk.mybatis.springboot.model.User;
+import tk.mybatis.springboot.util.MyMapper;
 
 /**
- * 通用接口
+ * @author liuzh_3nofxnp
+ * @since 2016-01-22 22:17
  */
-@Service
-public interface IService<T> {
-
-    T selectByKey(Object key);
-
-    int save(T entity);
-
-    int delete(Object key);
-
-    int updateAll(T entity);
-
-    int updateNotNull(T entity);
-
-    List<T> selectByExample(Object example);
-
-    List<T> selectAll();
-
-    List<T> select(T t);
-
-    T selectOne(T t);
-
-    T selectByPrimaryKey(T t);
-
-    //TODO 其他...
+public interface UserMapper extends MyMapper<User> {
 }
