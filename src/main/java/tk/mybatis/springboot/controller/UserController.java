@@ -31,6 +31,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tk.mybatis.springboot.model.User;
+import tk.mybatis.springboot.service.IService;
 import tk.mybatis.springboot.service.UserService;
 
 import java.util.List;
@@ -41,47 +42,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController<User>{
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping
-    public PageInfo<User> getAll(User user) {
-        if (user.getPage() != null && user.getRows() != null) {
-            PageHelper.startPage(user.getPage(), user.getRows());
-        }
-        List<User> userList = userService.select(user);
-        return new PageInfo<User>(userList);
-    }
-
-    @RequestMapping(value = "/add")
-    public User add() {
-        return new User();
-    }
-
-    @RequestMapping(value = "/view/{id}")
-    public User view(@PathVariable Integer id) {
-        ModelAndView result = new ModelAndView();
-        User user = userService.selectByKey(id);
-        return user;
-    }
-
-    @RequestMapping(value = "/delete/{id}")
-    public ModelMap delete(@PathVariable Integer id) {
-        ModelMap result = new ModelMap();
-        userService.delete(id);
-        result.put("msg", "删除成功!");
-        return result;
-    }
-
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelMap save(@RequestBody User user) {
-        ModelMap result = new ModelMap();
-        String msg = user.getId() == null ? "新增成功!" : "更新成功!";
-        userService.save(user);
-        result.put("user", user);
-        result.put("msg", msg);
-        return result;
+    @Override
+    protected IService<User> getService() {
+        return userService;
     }
 }
