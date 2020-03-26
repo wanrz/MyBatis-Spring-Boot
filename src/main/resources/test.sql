@@ -224,3 +224,16 @@ INSERT INTO `country` VALUES (183,'Zambia','ZM');
 -- 城市信息
 INSERT INTO `city` VALUES ('1', '石家庄', '河北');
 INSERT INTO `city` VALUES ('2', '邯郸', '河北');
+
+create table `user` (
+    `id` varchar (96),
+    `name` varchar (384),
+    `login_name` varchar (384),
+    `pass_word` varchar (384),
+    `create_user` varchar (384),
+    `create_time` bigint (20),
+    `update_user` varchar (384),
+    `update_time` bigint (20)
+);
+insert into `user` (`id`, `name`, `login_name`, `pass_word`, `create_user`, `create_time`, `update_user`, `update_time`) values('1','1','1','1','1','1','1','1');
+
