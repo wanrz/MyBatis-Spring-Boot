@@ -25,8 +25,8 @@
 package tk.mybatis.springboot.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.springboot.service.IService;
+import tk.mybatis.springboot.util.MyMapper;
 
 import java.util.List;
 
@@ -36,9 +36,9 @@ import java.util.List;
 public abstract class BaseService<T> implements IService<T> {
 
     @Autowired
-    protected Mapper<T> mapper;
+    protected MyMapper<T> mapper;
 
-    public Mapper<T> getMapper() {
+    public MyMapper<T> getMapper() {
         return mapper;
     }
 
@@ -70,6 +70,26 @@ public abstract class BaseService<T> implements IService<T> {
     @Override
     public List<T> selectByExample(Object example) {
         return mapper.selectByExample(example);
+    }
+
+    @Override
+    public List<T> selectAll(){
+        return mapper.selectAll();
+    }
+
+    @Override
+    public List<T> select(T t){
+        return mapper.select(t);
+    }
+
+    @Override
+    public  T selectOne(T t){
+        return mapper.selectOne(t);
+    }
+
+    @Override
+    public  T selectByPrimaryKey(T t){
+        return mapper.selectByPrimaryKey(t);
     }
 
     //TODO 其他...

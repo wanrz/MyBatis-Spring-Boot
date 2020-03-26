@@ -46,5 +46,13 @@ public interface IService<T> {
 
     List<T> selectByExample(Object example);
 
+    List<T> selectAll();
+
+    List<T> select(T t);
+
+    T selectOne(T t);
+
+    T selectByPrimaryKey(T t);
+
     //TODO 其他...
 }
